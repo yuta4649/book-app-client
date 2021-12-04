@@ -1,34 +1,72 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <!--
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-      -->
+    <router-view @api-global-error="onGlobalError" />
+    <div
+      class="modal error-dialog"
+      v-bind:class="{ 'is-active': errorDialogOpend }"
+    >
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">エラー</p>
+        </header>
+        <section class="modal-card-body">
+          <p class="is-size-6">{{ errorMessage }}</p>
+        </section>
+        <footer class="modal-card-foot dialog-btn">
+          <button class="button" @click="onClickCloseErrorDialog">
+            閉じる
+          </button>
+        </footer>
+      </div>
     </div>
-    <router-view/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+export default {
+  name: "App",
+  data: () => {
+    return {
+      errorDialogOpend: false,
+      errorMessage: null,
+      currentErrorCode: null,
+    };
+  },
+  methods: {
+    onGlobalError(payload) {
+      // TODO 複数エラーが発生した場合にキューイングする
+      this.errorDialogOpend = true;
+      this.errorMessage = payload.message;
+      this.currentErrorCode = payload.errorCode;
+    },
+    onClickCloseErrorDialog() {
+      this.errorDialogOpend = false;
+      this.errorMessage = null;
+      const errorCode = this.currentErrorCode;
+      this.currentErrorCode = null;
+      if (errorCode === "error.s002") {
+        this.$router.push("/login");
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+.modal-card-body p {
+  min-height: 50px;
 }
+.error-dialog .dialog-btns {
+  justify-content: center;
+}
+</style>
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+<style>
+.title-box {
+  margin: 1rem;
+}
+.button-area {
+  margin-top: 3rem;
 }
 </style>
