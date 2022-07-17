@@ -8,14 +8,14 @@
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title">エラー</p>
+          <p class="modal-card-title">ERROR</p>
         </header>
         <section class="modal-card-body">
           <p class="is-size-6">{{ errorMessage }}</p>
         </section>
         <footer class="modal-card-foot dialog-btn">
           <button class="button" @click="onClickCloseErrorDialog">
-            閉じる
+            close
           </button>
         </footer>
       </div>
