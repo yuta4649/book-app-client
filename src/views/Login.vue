@@ -25,7 +25,7 @@
             </div>
             <!-- パスワード入力項目 -->
             <div class="field">
-              <label class="label">パスワード</label>
+              <label class="label">Password</label>
               <p class="control has-icons-left">
                 <input
                   class="input"
@@ -44,7 +44,7 @@
                 class="button is-primary is-fullwidth is-rounded"
                 type="submit"
               >
-                ログイン
+                Login
               </button>
             </div>
           </form>
