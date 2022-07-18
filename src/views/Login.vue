@@ -10,7 +10,7 @@
             <error-message :errors="errors" />
             <!-- ログインID入力項目 -->
             <div class="field">
-              <label class="label">ログインID</label>
+              <label class="label">Login ID</label>
               <p class="control has-icons-left">
                 <input
                   class="input"
